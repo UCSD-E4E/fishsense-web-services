@@ -40,10 +40,10 @@ services:
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/postgres_admin_password
     volumes:
-      - ./postgres/data/:/var/lib/postgresql/data/:rw
-      - ./postgres/config/:/etc/postgresql/:ro
+      - ./pg_volumes/data/:/var/lib/postgresql/data/:rw
+      - ./pg_volumes/config/:/etc/postgresql/:ro
       # - ./.secrets/certs/:/certs/:ro
-      - ./postgres/scripts/:/docker-entrypoint-initdb.d/:ro
+      - ./pg_volumes/scripts/:/docker-entrypoint-initdb.d/:ro
       - /etc/passwd:/etc/passwd:ro
     secrets:
       - postgres_admin_password
