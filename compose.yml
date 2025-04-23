@@ -1,6 +1,6 @@
 services:
   spider:
-    image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:latest
+    image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:v0.42.1
     container_name: fishsense_data_processing_spider
     volumes:
       - fishsense_data_reef:/mnt/fishsense_data_reef:ro
