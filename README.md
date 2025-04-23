@@ -8,4 +8,8 @@ FishSense Web Services - Deploy
 4. Ensure `.secrets/postgres_admin_password.txt` is populated
 5. Ensure `spider_volumes/config/.secrets.toml` is populated with the following:
 - `label_studio.api_key`
-6. 
+6. Ensure `.env` is populated.  Example:
+```
+USER_ID=1001
+GROUP_ID=1001
+```
