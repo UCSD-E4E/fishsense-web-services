@@ -1,0 +1,69 @@
+services:
+  spider:
+    image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:latest
+    container_name: fishsense_data_processing_spider
+    volumes:
+      - fishsense_data_reef:/mnt/fishsense_data_reef:ro
+      - ./settings.toml:/e4efs/config/settings.toml:ro
+      - ./.secrets.toml:/e4efs/config/.secrets.toml:ro
+      - ./data_paths.json:/e4efs/config/data_paths.json:ro
+      - ./data:/e4efs/data:rw
+      - ./logs:/e4efs/logs:rw
+      - ./cache:/e4efs/cache:rw
+      - fishsense_lens_cal:/mnt/fishsense_lens_cal:ro
+      - fishsense_process_work:/mnt/fishsense_process_work:rw
+    environment:
+      E4EFS_POSTGRES__USERNAME: postgres
+      E4EFS_POSTGRES__HOST: postgres
+      E4EFS_POSTGRES__PASSWORD_FILE: /run/secrets/postgres_admin_password
+      E4EFS_SCRAPER__DATA_PATHS: /e4efs/config/data_paths.json
+      E4EFS_WEB_API__ROOT_URL: https://orchestrator.fishsense.e4e.ucsd.edu
+    ports:
+      - 9095:9090
+    secrets:
+      - postgres_admin_password
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    labels:
+      caddy: orchestrator.fishsense.e4e.ucsd.edu
+      caddy.reverse_proxy: "{{upstreams 80}}"
+    networks:
+      - caddy_proxy
+      - default
+    restart: on-failure:15
+  postgres:
+    image: postgres:16.4
+    restart: always
+    shm_size: 128 mb
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_admin_password
+    volumes:
+      - ./postgres/data/:/var/lib/postgresql/data/:rw
+      - ./postgres/config/:/etc/postgresql/:ro
+      # - ./.secrets/certs/:/certs/:ro
+      - ./postgres/scripts/:/docker-entrypoint-initdb.d/:ro
+      - /etc/passwd:/etc/passwd:ro
+    secrets:
+      - postgres_admin_password
+    command: --config_file=/etc/postgresql/postgres.conf
+    ports:
+      - 5432:5432
+    user: "${USER_ID}:${GROUP_ID}"
+
+secrets:
+  postgres_admin_password: 
+    file: .secrets/postgres_admin_password.txt
+
+volumes:
+  fishsense_data_reef:
+    external: true
+  fishsense_lens_cal:
+    external: true
+  fishsense_process_work:
+    external: true
+
+networks:
+  caddy_proxy:
+    external: true
