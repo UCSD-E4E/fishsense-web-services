@@ -13,3 +13,4 @@ FishSense Web Services - Deploy
 USER_ID=1001
 GROUP_ID=1001
 ```
+7. Ensure `spider_volumes/data`, `spider_volumes/logs`, `spider_volumes/cache` exist
