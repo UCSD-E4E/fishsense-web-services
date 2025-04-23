@@ -1,4 +1,17 @@
 services:
+  label_studio_reporter:
+    image: ghcr.io/ucsd-e4e/label-studio-slack-reporter:v0.5.0
+    container_name: label_studio_reporter
+    restart: always
+    command: --config /e4e/config/config.toml
+    ports:
+      - 9101:9100
+    volumes:
+      - ./label_studio_reporter/config:/e4e/config/:ro
+      - ./label_studio_reporter/cache:/e4e/cache/:rw
+      - ./label_studio_reporter/logs:/e4e/logs/:rw
+    user: "${USER_ID}:${GROUP_ID}"
+    
   spider:
     image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:v0.42.1
     container_name: fishsense_data_processing_spider
