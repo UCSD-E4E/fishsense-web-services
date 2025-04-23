@@ -15,3 +15,4 @@ GROUP_ID=1001
 ```
 7. Ensure `spider_volumes/data`, `spider_volumes/logs`, `spider_volumes/cache` exist
 8. Ensure `label_studio_reporter/config/config.toml` and `label_studio_reporter/config/gcloud_credentials.json` exist
+9. Ensure `label_studio_reporter/cache` and `label_studio_reporter/logs` exist
