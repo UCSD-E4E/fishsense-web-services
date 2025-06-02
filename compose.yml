@@ -6,6 +6,9 @@ services:
     command: --config /e4e/config/config.toml
     ports:
       - 9101:9100
+    networks:
+      - caddy_proxy
+      - default
     volumes:
       - ./label_studio_reporter/config:/e4e/config/:ro
       - ./label_studio_reporter/cache:/e4e/cache/:rw
