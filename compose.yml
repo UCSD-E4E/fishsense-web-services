@@ -1,6 +1,6 @@
 services:
   label_studio_reporter:
-    image: ghcr.io/ucsd-e4e/label-studio-slack-reporter:v0.5.1
+    image: ghcr.io/ucsd-e4e/label-studio-slack-reporter:v1.0.0
     container_name: label_studio_reporter
     restart: always
     command: --config /e4e/config/config.toml
