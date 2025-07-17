@@ -16,7 +16,7 @@ services:
     user: "${USER_ID}:${GROUP_ID}"
     
   spider:
-    image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:v1.0.2
+    image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:v1.0.4
     container_name: fishsense_data_processing_spider
     volumes:
       - fishsense_data_reef:/mnt/fishsense_data_reef:ro
