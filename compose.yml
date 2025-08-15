@@ -21,6 +21,8 @@ services:
     labels:
       caddy: orchestrator.fishsense.e4e.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 80}}"
+    volumes:
+      - ./proxy_volumes/data:/data
     networks:
       - caddy_proxy
       - default
