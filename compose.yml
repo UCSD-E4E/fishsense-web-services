@@ -19,14 +19,12 @@ services:
     image: nginx:1.29.1-alpine
     container_name: fishsense_proxy
     volumes:
-      - ./proxy_volumes:/usr/share/nginx/html
     labels:
       caddy: orchestrator.fishsense.e4e.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 80}}"
     networks:
       - caddy_proxy
       - default
-    user: ${USER_ID}:${GROUP_ID}
     restart: on-failure:15
     
   # spider:
