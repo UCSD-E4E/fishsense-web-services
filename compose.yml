@@ -19,7 +19,6 @@ services:
     container_name: fishsense_proxy
     build:
       dockerfile: ./proxy/dockerfile
-      context: ./proxy
     labels:
       caddy: orchestrator.fishsense.e4e.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 80}}"
