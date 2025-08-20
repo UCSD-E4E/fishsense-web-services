@@ -47,7 +47,16 @@ services:
       - .secrets/temporal_database_password.env
     volumes:
       - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
-    
+  temporal-ui:
+    container_name: temporal-ui
+    depends_on:
+      - temporal
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+      - TEMPORAL_CORS_ORIGINS=http://localhost:3000
+      - TEMPORAL_UI_PUBLIC_PATH=/temporal
+    image: temporalio/ui:2.39.0
+
   # spider:
   #   image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:v1.2.3
   #   container_name: fishsense_data_processing_spider
