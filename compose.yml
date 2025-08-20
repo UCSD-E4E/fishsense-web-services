@@ -56,6 +56,13 @@ services:
       - TEMPORAL_ADDRESS=fishsense_temporal:7233
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
       - TEMPORAL_UI_PUBLIC_PATH=/temporal
+      - TEMPORAL_AUTH_ENABLED=true
+      - TEMPORAL_AUTH_PROVIDER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-temporal/.well-known/openid-configuration
+      - TEMPORAL_AUTH_ISSUER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-temporal/
+      - TEMPORAL_AUTH_CALLBACK_URL=https://orchestrator.fishsense.e4e.ucsd.edu/temporal
+      - TEMPORAL_AUTH_SCOPES=openid profile email
+    env_file:
+      - .secrets/temporal_ui.env
     image: temporalio/ui:2.39.0
 
   # spider:

@@ -6,7 +6,8 @@ FishSense Web Services - Deploy
 2. Ensure `//e4e-nas.ucsd.edu/fishsense/Fishsense Lite Calibration Parameters` is mounted as a docker volume named `fishsense_lens_cal`.
 3. Ensure `//e4e-nas.ucsd.edu/fishsense_process_work` is mounted as a docker volume named `fishsense_process_work`.
 4. Ensure `.secrets/postgres_admin_password.txt` is populated
-4. Ensure `.secrets/temporal_database_password.txt` is populated
+4. Ensure `.secrets/temporal_database_password.env` is populated with `POSTGRES_PWD`.
+4. Ensure `.secrets/temporal_ui.env` is populated with `TEMPORAL_AUTH_CLIENT_ID` and `TEMPORAL_AUTH_CLIENT_SECRET`.
 5. Ensure `spider_volumes/config/.secrets.toml` is populated with the following:
 - `label_studio.api_key`
 6. Ensure `.env` is populated.  Example:
