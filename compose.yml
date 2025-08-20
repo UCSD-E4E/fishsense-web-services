@@ -41,9 +41,9 @@ services:
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development-sql.yaml
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CLI_ADDRESS=temporal:7233
-    image: temporalio/auto-setup:${TEMPORAL_VERSION}
+    image: temporalio/auto-setup:1.28.1.0
     volumes:
-      - ./dynamicconfig:/etc/temporal/config/dynamicconfig
+      - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
     
   # spider:
   #   image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:v1.2.3
