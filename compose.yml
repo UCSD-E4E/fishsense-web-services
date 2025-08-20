@@ -43,6 +43,8 @@ services:
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CLI_ADDRESS=temporal:7233
     image: temporalio/auto-setup:1.28.1.0
+    env_file:
+      - .secrets/temporal_database_password.env
     volumes:
       - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
     
@@ -95,8 +97,6 @@ services:
 secrets:
   postgres_admin_password: 
     file: .secrets/postgres_admin_password.txt
-  temporal_database_password: 
-    file: .secrets/temporal_database_password.txt
 
 volumes:
   fishsense_data_reef:
