@@ -47,6 +47,8 @@ services:
       - .secrets/temporal_database_password.env
     volumes:
       - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
+    user: "${USER_ID}:${GROUP_ID}"
+
   temporal-ui:
     container_name: fishsense_temporal-ui
     depends_on:
