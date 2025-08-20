@@ -29,7 +29,7 @@ services:
     restart: on-failure:15
 
   temporal:
-    container_name: temporal
+    container_name: fishsense_temporal
     depends_on:
       - postgres
     environment:
@@ -48,11 +48,11 @@ services:
     volumes:
       - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
   temporal-ui:
-    container_name: temporal-ui
+    container_name: fishsense_temporal-ui
     depends_on:
       - temporal
     environment:
-      - TEMPORAL_ADDRESS=temporal:7233
+      - TEMPORAL_ADDRESS=fishsense_temporal:7233
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
       - TEMPORAL_UI_PUBLIC_PATH=/temporal
     image: temporalio/ui:2.39.0
