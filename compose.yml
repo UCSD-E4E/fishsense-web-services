@@ -33,8 +33,9 @@ services:
     depends_on:
       - postgres
     environment:
-      - DB=temporal_db
+      - DB=postgres12
       - DB_PORT=5432
+      - DBNAME=temporal_db
       - POSTGRES_USER=temporal
       - POSTGRES_SEEDS=postgres
       - SKIP_DB_CREATE=true
