@@ -10,3 +10,4 @@ laser_project_ids = [43, 42]
 host = "postgres"
 port = "5432"
 username = "postgres"
+database = "postgres"
