@@ -46,8 +46,11 @@ services:
     image: temporalio/auto-setup:1.28.1.0
     env_file:
       - .secrets/temporal_database_password.env
+    ports:
+      - 7233:7233
     volumes:
       - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
+    restart: on-failure:15
 
   temporal-ui:
     container_name: fishsense_temporal-ui
@@ -64,6 +67,16 @@ services:
     env_file:
       - .secrets/temporal_ui.env
     image: temporalio/ui:2.39.0
+    restart: on-failure:15
+
+  temporal-worker:
+    container_name: fishsense_temporal-worker
+    depends_on:
+      - temporal
+    volumes:
+      - ./temporal_worker_volumes/settings.toml:/e4efs/config/settings.toml:ro
+    image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.1.0
+    restart: on-failure:15
 
   # spider:
   #   image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:v1.2.3
