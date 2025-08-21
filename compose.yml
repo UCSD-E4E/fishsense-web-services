@@ -75,7 +75,8 @@ services:
       - temporal
     volumes:
       - ./worker_volumes/config:/e4efs/config:ro
-    image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.1.0
+      - ./worker_volumes/logs:/e4efs/logs:rw
+    image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.2.0
     restart: on-failure:15
 
   # spider:
