@@ -1,5 +1,5 @@
 [temporal]
-host = "fishsense_temporal"
+host = "fishsense-temporal"
 port = "7233"
 
 [label_studio]
