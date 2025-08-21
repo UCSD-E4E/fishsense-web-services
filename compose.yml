@@ -74,7 +74,7 @@ services:
     depends_on:
       - temporal
     volumes:
-      - ./temporal_worker_volumes/config:/e4efs/config:ro
+      - ./worker_volumes/config:/e4efs/config:ro
     image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.1.0
     restart: on-failure:15
 
