@@ -23,7 +23,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 80}}"
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./proxy_volumes/data:/api/v1/data
+      - ./proxy_volumes/data:/data
     networks:
       - caddy_proxy
       - default
