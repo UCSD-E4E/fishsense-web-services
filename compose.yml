@@ -70,7 +70,6 @@ services:
     restart: on-failure:15
 
   temporal-worker:
-    container_name: fishsense_temporal-worker
     depends_on:
       - temporal
     volumes:
@@ -78,6 +77,8 @@ services:
       - ./worker_volumes/logs:/e4efs/logs:rw
     image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.3.1
     restart: on-failure:15
+    deploy:
+      replicas: 2
 
   # spider:
   #   image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:v1.2.3
