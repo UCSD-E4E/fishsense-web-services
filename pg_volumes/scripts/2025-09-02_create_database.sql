@@ -1,0 +1,16 @@
+CREATE DATABASE superset;
+
+CREATE ROLE superset WITH
+    LOGIN
+    ENCRYPTED PASSWORD 'SCRAM-SHA-256$4096:SCG3t5CMCNDy4udQQCaF/A==$yTIv5vat2hgD8veE7VGn7LaFofwDEU2S1g173LlbTkU=:PbgXj1MajK+O7bAJv/kZDpTsGUTJxTUTnvavTjSLM2o=';
+GRANT ALL PRIVILEGES ON DATABASE superset TO superset;
+\c superset postgres
+GRANT ALL ON SCHEMA public TO superset;
+
+-- Provide read only access to the fishsense database so that we can report on it
+GRANT CONNECT ON DATABASE fishsense TO superset;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO superset;
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO superset;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO superset;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO superset;

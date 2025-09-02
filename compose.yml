@@ -1,3 +1,9 @@
+x-superset-image: &superset-image apache/superset:4.1.4-py311
+x-superset-volumes:
+  &superset-volumes # /app/pythonpath_docker will be appended to the PYTHONPATH in the final container
+  - ./superset/docker:/app/docker
+  - ./superset/home:/app/superset_home
+
 services:
   label_studio_reporter:
     image: ghcr.io/ucsd-e4e/label-studio-slack-reporter:v1.0.9
@@ -80,9 +86,35 @@ services:
   #   deploy:
   #     replicas: 2
 
+  superset-init:
+    image: *superset-image
+    container_name: superset_init
+    command: ["/app/docker/docker-init.sh"]
+    env_file:
+      - path: ./superset/docker/.env # default
+        required: true
+      - path: ./.secrets/superset-env # optional override
+        required: false
+    depends_on:
+      postgres:
+        condition: service_started
+      redis:
+        condition: service_started
+    user: "${USER_ID}:${GROUP_ID}"
+    volumes: *superset-volumes
+    healthcheck:
+      disable: true
+
+  redis:
+    image: redis:7
+    container_name: superset_cache
+    restart: on-failure:15
+    volumes:
+      - ./redis:/data
+
   postgres:
     image: postgres:16.4
-    restart: always
+    restart: on-failure:15
     shm_size: 128 mb
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/postgres_admin_password
