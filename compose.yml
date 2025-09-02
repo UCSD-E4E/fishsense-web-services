@@ -69,44 +69,17 @@ services:
     image: temporalio/ui:2.39.0
     restart: on-failure:15
 
-  temporal-worker:
-    depends_on:
-      - temporal
-    volumes:
-      - ./worker_volumes/config:/e4efs/config:ro
-      - ./worker_volumes/logs:/e4efs/logs:rw
-    image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.4.0
-    restart: on-failure:15
-    deploy:
-      replicas: 2
-
-  # spider:
-  #   image: ghcr.io/ucsd-e4e/fishsense-data-processing-spider:v1.2.3
-  #   container_name: fishsense_data_processing_spider
+  # temporal-worker:
+  #   depends_on:
+  #     - temporal
   #   volumes:
-  #     - fishsense_data_reef:/mnt/fishsense_data_reef:ro
-  #     - ./spider_volumes/config/settings.toml:/e4efs/config/settings.toml:ro
-  #     - ./spider_volumes/config/.secrets.toml:/e4efs/config/.secrets.toml:ro
-  #     - ./spider_volumes/config/data_paths.json:/e4efs/config/data_paths.json:ro
-  #     - ./spider_volumes/data:/e4efs/data:rw
-  #     - ./spider_volumes/logs:/e4efs/logs:rw
-  #     - ./spider_volumes/cache:/e4efs/cache:rw
-  #     - fishsense_lens_cal:/mnt/fishsense_lens_cal:ro
-  #     - fishsense_process_work:/mnt/fishsense_process_work:rw
-  #   environment:
-  #     E4EFS_POSTGRES__USERNAME: postgres
-  #     E4EFS_POSTGRES__HOST: postgres
-  #     E4EFS_POSTGRES__PASSWORD_FILE: /run/secrets/postgres_admin_password
-  #     E4EFS_SCRAPER__DATA_PATHS: /e4efs/config/data_paths.json
-  #     E4EFS_WEB_API__ROOT_URL: https://orchestrator.fishsense.e4e.ucsd.edu
-  #   ports:
-  #     - 9095:9090
-  #   secrets:
-  #     - postgres_admin_password
+  #     - ./worker_volumes/config:/e4efs/config:ro
+  #     - ./worker_volumes/logs:/e4efs/logs:rw
+  #   image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.4.1
+  #   restart: on-failure:15
   #   deploy:
-  #     resources:
-  #       limits:
-  #         memory: 4G
+  #     replicas: 2
+  
   postgres:
     image: postgres:16.4
     restart: always
