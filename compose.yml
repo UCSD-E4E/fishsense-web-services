@@ -29,6 +29,13 @@ services:
       - default
     restart: on-failure:15
 
+  dashboard:
+    container_name: dashboard
+    image: hywax/mafl:v0.15.4
+    restart: on-failure:15
+    volumes:
+      - ./mafl:/app/data
+
   temporal:
     container_name: fishsense-temporal
     depends_on:
@@ -79,7 +86,7 @@ services:
   #   restart: on-failure:15
   #   deploy:
   #     replicas: 2
-  
+
   postgres:
     image: postgres:16.4
     restart: always
