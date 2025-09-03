@@ -68,7 +68,7 @@ services:
     environment:
       - TEMPORAL_ADDRESS=fishsense-temporal:7233
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
-      - TEMPORAL_UI_PUBLIC_PATH=/temporal
+      - TEMPORAL_UI_PUBLIC_PATH=/workflows
       - TEMPORAL_AUTH_ENABLED=true
       - TEMPORAL_AUTH_PROVIDER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-temporal/
       - TEMPORAL_AUTH_CALLBACK_URL=https://orchestrator.fishsense.e4e.ucsd.edu/temporal/auth/sso/callback
