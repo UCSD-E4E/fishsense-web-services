@@ -27,6 +27,8 @@ import sys
 from celery.schedules import crontab
 from flask_caching.backends.filesystemcache import FileSystemCache
 
+from flask_appbuilder.security.manager import AUTH_OAUTH
+
 logger = logging.getLogger()
 
 DATABASE_DIALECT = os.getenv("DATABASE_DIALECT")
@@ -117,6 +119,9 @@ ENABLE_PROXY_FIX = True
 
 log_level_text = os.getenv("SUPERSET_LOG_LEVEL", "INFO")
 LOG_LEVEL = getattr(logging, log_level_text.upper(), logging.INFO)
+
+# Set the authentication type to OAuth
+AUTH_TYPE = AUTH_OAUTH
 
 OAUTH_PROVIDERS = [
     {
