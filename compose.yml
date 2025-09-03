@@ -1,4 +1,4 @@
-x-superset-image: &superset-image apachesuperset.docker.scarf.sh/apache/superset:6.0.0rc1-py311
+x-superset-image: &superset-image apachesuperset.docker.scarf.sh/apache/superset:5.0.0-py311
 x-superset-volumes:
   &superset-volumes # /app/pythonpath_docker will be appended to the PYTHONPATH in the final container
   - ./superset_volumes/docker:/app/docker
@@ -24,8 +24,6 @@ services:
   proxy:
     image: nginx:1.29.1-alpine
     container_name: fishsense_proxy
-    depends_on:
-      - superset
     labels:
       caddy: orchestrator.fishsense.e4e.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 80}}"
@@ -104,6 +102,12 @@ services:
     command: ["/app/docker/docker-bootstrap.sh", "app-gunicorn"]
     user: "root"
     restart: unless-stopped
+    labels:
+      caddy: analytics.fishsense.e4e.ucsd.edu
+      caddy.reverse_proxy: "{{upstreams 8088}}"
+    networks:
+      - caddy_proxy
+      - default
     depends_on:
       superset-init:
         condition: service_completed_successfully
