@@ -69,8 +69,8 @@ services:
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
       - TEMPORAL_UI_PUBLIC_PATH=/
       - TEMPORAL_AUTH_ENABLED=true
-      - TEMPORAL_AUTH_PROVIDER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-temporal/
-      - TEMPORAL_AUTH_CALLBACK_URL=https://orchestrator.fishsense.e4e.ucsd.edu/temporal/auth/sso/callback
+      - TEMPORAL_AUTH_PROVIDER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-workflows/
+      - TEMPORAL_AUTH_CALLBACK_URL=https://workflows.fishsense.e4e.ucsd.edu/auth/sso/callback
       - TEMPORAL_AUTH_SCOPES=openid,email,profile
     networks:
       - caddy_proxy
