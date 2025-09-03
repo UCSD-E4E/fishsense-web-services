@@ -86,6 +86,22 @@ services:
   #   deploy:
   #     replicas: 2
 
+  superset:
+    container_name: fishsense_superset
+    env_file:
+      - path: ./superset_volumes/docker/.env # default
+        required: true
+      - path: ./.secrets/superset-env # optional override
+        required: false
+    image: *superset-image
+    command: ["/app/docker/docker-bootstrap.sh", "app-gunicorn"]
+    user: "root"
+    restart: unless-stopped
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+    volumes: *superset-volumes
+
   superset-init:
     image: *superset-image
     container_name: superset_init
