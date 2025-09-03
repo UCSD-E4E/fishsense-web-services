@@ -142,6 +142,12 @@ OAUTH_PROVIDERS = [
     }
 ]
 
+# Will allow user self registration, allowing to create Flask users from Authorized User
+AUTH_USER_REGISTRATION = True
+
+# The default user self registration role
+AUTH_USER_REGISTRATION_ROLE = "Public"
+
 if os.getenv("CYPRESS_CONFIG") == "true":
     # When running the service as a cypress backend, we need to import the config
     # located @ tests/integration_tests/superset_test_config.py
