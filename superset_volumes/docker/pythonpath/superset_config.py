@@ -118,6 +118,25 @@ ENABLE_PROXY_FIX = True
 log_level_text = os.getenv("SUPERSET_LOG_LEVEL", "INFO")
 LOG_LEVEL = getattr(logging, log_level_text.upper(), logging.INFO)
 
+OAUTH_PROVIDERS = [
+    {
+        'name': 'authentik',
+        'icon': '',
+        'token_key': 'access_token',
+        'remote_app': {
+            'client_id': os.environ.get('AUTHENTIK_KEY'),
+            'client_secret': os.environ.get('AUTHENTIK_SECRET'),
+            'api_base_url': 'https://auth.fabricant.ucsd.edu/application/o/fishsense-superset/',
+            'client_kwargs':{
+              'scope': 'email profile'
+            },
+            'request_token_url': None,
+            'access_token_url': 'https://auth.fabricant.ucsd.edu/application/o/token/',
+            'authorize_url': 'https://auth.fabricant.ucsd.edu/application/o/authorize/'
+        }
+    }
+]
+
 if os.getenv("CYPRESS_CONFIG") == "true":
     # When running the service as a cypress backend, we need to import the config
     # located @ tests/integration_tests/superset_test_config.py
