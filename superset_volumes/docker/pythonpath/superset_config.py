@@ -113,6 +113,7 @@ WEBDRIVER_BASEURL_USER_FRIENDLY = (
     f"https://orchestrator.fishsense.e4e.ucsd.edu{os.environ.get('SUPERSET_APP_ROOT', '/')}/"
 )
 SQLLAB_CTAS_NO_LIMIT = True
+ENABLE_PROXY_FIX = True
 
 log_level_text = os.getenv("SUPERSET_LOG_LEVEL", "INFO")
 LOG_LEVEL = getattr(logging, log_level_text.upper(), logging.INFO)
