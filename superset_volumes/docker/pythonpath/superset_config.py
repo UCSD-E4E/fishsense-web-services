@@ -114,7 +114,7 @@ WEBDRIVER_BASEURL_USER_FRIENDLY = (
 )
 SQLLAB_CTAS_NO_LIMIT = True
 
-SUPERSET_ROOT = os.getenv("SUPERSET_ROOT", "/superset")
+SUPERSET_APP_ROOT = os.getenv("SUPERSET_APP_ROOT", "/superset")
 
 log_level_text = os.getenv("SUPERSET_LOG_LEVEL", "INFO")
 LOG_LEVEL = getattr(logging, log_level_text.upper(), logging.INFO)
