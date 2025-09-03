@@ -84,7 +84,7 @@ services:
     volumes:
       - ./worker_volumes/config:/e4efs/config:ro
       - ./worker_volumes/logs:/e4efs/logs:rw
-    image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.5.5
+    image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.5.6
     restart: on-failure:15
     deploy:
       replicas: 2
