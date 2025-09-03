@@ -101,7 +101,7 @@ services:
     image: *superset-image
     command: ["/app/docker/docker-bootstrap.sh", "app-gunicorn"]
     user: "root"
-    restart: unless-stopped
+    restart: on-failure:15
     labels:
       caddy: analytics.fishsense.e4e.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 8088}}"
@@ -137,11 +137,11 @@ services:
     container_name: superset_worker
     command: ["/app/docker/docker-bootstrap.sh", "worker"]
     env_file:
-      - path: docker/.env # default
+      - path: ./superset_volumes/docker/.env # default
         required: true
-      - path: docker/.env-local # optional override
+      - path: ./.secrets/superset-env # optional override
         required: false
-    restart: unless-stopped
+    restart: on-failure:15
     depends_on:
       superset-init:
         condition: service_completed_successfully
@@ -159,11 +159,11 @@ services:
     container_name: superset_worker_beat
     command: ["/app/docker/docker-bootstrap.sh", "beat"]
     env_file:
-      - path: docker/.env # default
+      - path: ./superset_volumes/docker/.env # default
         required: true
-      - path: docker/.env-local # optional override
+      - path: ./.secrets/superset-env # optional override
         required: false
-    restart: unless-stopped
+    restart: on-failure:15
     depends_on:
       superset-init:
         condition: service_completed_successfully
