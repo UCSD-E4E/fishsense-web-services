@@ -121,7 +121,7 @@ LOG_LEVEL = getattr(logging, log_level_text.upper(), logging.INFO)
 OAUTH_PROVIDERS = [
     {
         'name': 'authentik',
-        'icon': '',
+        'icon': 'fa-address-card',
         'token_key': 'access_token',
         'remote_app': {
             'client_id': os.environ.get('AUTHENTIK_KEY'),
