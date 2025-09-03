@@ -135,6 +135,7 @@ OAUTH_PROVIDERS = [
             'client_kwargs':{
               'scope': 'email profile'
             },
+            'jwks_uri': 'https://auth.fabricant.ucsd.edu/application/o/fishsense-analytics/jwks/',
             'request_token_url': None,
             'access_token_url': 'https://auth.fabricant.ucsd.edu/application/o/token/',
             'authorize_url': 'https://auth.fabricant.ucsd.edu/application/o/authorize/'
