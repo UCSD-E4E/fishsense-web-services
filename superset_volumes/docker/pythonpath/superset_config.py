@@ -131,7 +131,7 @@ OAUTH_PROVIDERS = [
         'remote_app': {
             'client_id': os.environ.get('AUTHENTIK_KEY'),
             'client_secret': os.environ.get('AUTHENTIK_SECRET'),
-            'api_base_url': 'https://auth.fabricant.ucsd.edu/application/o/fishsense-superset/',
+            'api_base_url': 'https://auth.fabricant.ucsd.edu/application/o/fishsense-analytics/',
             'client_kwargs':{
               'scope': 'email profile'
             },
