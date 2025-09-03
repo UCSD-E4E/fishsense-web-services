@@ -24,6 +24,9 @@ services:
   proxy:
     image: nginx:1.29.1-alpine
     container_name: fishsense_proxy
+    depends_on:
+      - superset
+      - temporal
     labels:
       caddy: orchestrator.fishsense.e4e.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 80}}"
