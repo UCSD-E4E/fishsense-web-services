@@ -80,7 +80,7 @@ services:
     image: temporalio/ui:2.39.0
     labels:
       caddy: workflows.fishsense.e4e.ucsd.edu
-      caddy.reverse_proxy: "{{upstreams 8080}}"
+      caddy.reverse_proxy: "{{upstreams 3000}}"
     restart: on-failure:15
 
   temporal-worker:
