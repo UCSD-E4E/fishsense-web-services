@@ -100,7 +100,7 @@ services:
         required: false
     image: *superset-image
     command: ["/app/docker/docker-bootstrap.sh", "app-gunicorn"]
-    user: "${USER_ID}:${GROUP_ID}"
+    user: "root"
     restart: unless-stopped
     labels:
       caddy: analytics.fishsense.e4e.ucsd.edu
