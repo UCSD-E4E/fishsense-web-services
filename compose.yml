@@ -100,7 +100,7 @@ services:
         condition: service_started
       redis:
         condition: service_started
-    user: "${USER_ID}:${GROUP_ID}"
+    user: "root"
     volumes: *superset-volumes
     healthcheck:
       disable: true
