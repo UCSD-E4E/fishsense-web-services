@@ -68,7 +68,7 @@ services:
     environment:
       - TEMPORAL_ADDRESS=fishsense-temporal:7233
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
-      - TEMPORAL_UI_PUBLIC_PATH=/workflows
+      - TEMPORAL_UI_PUBLIC_PATH=/
       - TEMPORAL_AUTH_ENABLED=true
       - TEMPORAL_AUTH_PROVIDER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-temporal/
       - TEMPORAL_AUTH_CALLBACK_URL=https://orchestrator.fishsense.e4e.ucsd.edu/temporal/auth/sso/callback
@@ -76,6 +76,9 @@ services:
     env_file:
       - .secrets/temporal_ui.env
     image: temporalio/ui:2.39.0
+    labels:
+      caddy: workflows.fishsense.e4e.ucsd.edu
+      caddy.reverse_proxy: "{{upstreams 8080}}"
     restart: on-failure:15
 
   temporal-worker:
