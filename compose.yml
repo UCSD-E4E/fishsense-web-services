@@ -1,8 +1,8 @@
 x-superset-image: &superset-image apache/superset:4.1.4-py311
 x-superset-volumes:
   &superset-volumes # /app/pythonpath_docker will be appended to the PYTHONPATH in the final container
-  - ./superset/docker:/app/docker
-  - ./superset/home:/app/superset_home
+  - ./superset_volumes/docker:/app/docker
+  - ./superset_volumes/home:/app/superset_home
 
 services:
   label_studio_reporter:
@@ -91,7 +91,7 @@ services:
     container_name: superset_init
     command: ["/app/docker/docker-init.sh"]
     env_file:
-      - path: ./superset/docker/.env # default
+      - path: ./superset_volumes/docker/.env # default
         required: true
       - path: ./.secrets/superset-env # optional override
         required: false
@@ -110,7 +110,7 @@ services:
     container_name: superset_cache
     restart: on-failure:15
     volumes:
-      - ./redis:/data
+      - ./redis_volumes/data:/data
 
   postgres:
     image: postgres:16.4
