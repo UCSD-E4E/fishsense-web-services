@@ -3,13 +3,13 @@ services:
   Projects:
     - title: REEF - FishSense HeadTail Low Priority
       description: head tail low priority labeling project
-      link: https://labeler.e4e.ucsd.edu/projects/45/data
+      link: https://labeler.e4e.ucsd.edu/projects/45
       icon:
         name: streamline-sharp:label-folder-tag-remix
         wrap: true
     - title: REEF - FishSense HeadTail High Priority
       description: head tail high priority labeling project
-      link: https://labeler.e4e.ucsd.edu/projects/44/data
+      link: https://labeler.e4e.ucsd.edu/projects/44
       icon:
         name: streamline-sharp:label-folder-tag-remix
         wrap: true
