@@ -1,11 +1,29 @@
 title: FishSense
 services:
   Projects:
-    - title: Home Assistant
-      description: Home automation
-      link: https://home-assistant.home.local/
+    - title: REEF - FishSense HeadTail Low Priority
+      description: head tail low priority labeling project
+      link: https://labeler.e4e.ucsd.edu/projects/45/data
       icon:
-        name: simple-icons:homeassistant
+        name: streamline-sharp:label-folder-tag-remix
+        wrap: true
+    - title: REEF - FishSense HeadTail High Priority
+      description: head tail high priority labeling project
+      link: https://labeler.e4e.ucsd.edu/projects/44/data
+      icon:
+        name: streamline-sharp:label-folder-tag-remix
+        wrap: true
+    - title: REEF - FishSense Laser Low Priority
+      description: laser low priority labeling project
+      link: https://labeler.e4e.ucsd.edu/projects/43
+      icon:
+        name: streamline-sharp:label-folder-tag-remix
+        wrap: true
+    - title: REEF - FishSense Laser High Priority
+      description: laser high priority labeling project
+      link: https://labeler.e4e.ucsd.edu/projects/42
+      icon:
+        name: streamline-sharp:label-folder-tag-remix
         wrap: true
   Results:
     - title: Analytics
