@@ -28,7 +28,7 @@ services:
   Results:
     - title: Analytics
       description: Results dashboard from Apache Superset
-      link: https://analytics.fishsense.e4e.ucsd.edu/
+      link: https://analytics.fishsense.e4e.ucsd.edu/superset/dashboard/reef-smile-project
       icon:
         name: simple-icons:apachesuperset
         wrap: true
