@@ -179,6 +179,19 @@ services:
     volumes:
       - ./redis_volumes/data:/data
 
+  mafl:
+    container_name: mafl # change as needed
+    image: hywax/mafl
+    restart: on-failure:15
+    labels:
+      caddy: fishsense.e4e.ucsd.edu
+      caddy.reverse_proxy: "{{upstreams 3000}}"
+    networks:
+      - caddy_proxy
+      - default
+    volumes:
+      - ./mafl_volumes/data:/app/data
+
   postgres:
     image: postgres:16.4
     restart: on-failure:15
