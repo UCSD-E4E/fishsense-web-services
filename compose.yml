@@ -49,11 +49,11 @@ services:
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/docker.yml
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CLI_ADDRESS=temporal:7233
-      - "TEMPORAL_TLS_CA=/certs/ca/server-intermediate-ca.pem"
-      - "TEMPORAL_TLS_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem"
-      - "TEMPORAL_TLS_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key"
-      - "TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true"
-      - "TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu"
+      - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/server-intermediate-ca.pem
+      - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
+      - TEMPORAL_TLS_SERVER_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
+      - TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
+      - TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true
     image: temporalio/auto-setup:1.28.1.0
     env_file:
       - .secrets/temporal_database_password.env
