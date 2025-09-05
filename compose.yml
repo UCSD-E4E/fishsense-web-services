@@ -50,8 +50,8 @@ services:
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CLI_ADDRESS=temporal:7233
       - "TEMPORAL_TLS_CA=/certs/ca/server-intermediate-ca.pem"
-      - "TEMPORAL_TLS_CERT=/certs/internode/temporal.pem"
-      - "TEMPORAL_TLS_KEY=/certs/internode/temporal.key"
+      - "TEMPORAL_TLS_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem"
+      - "TEMPORAL_TLS_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key"
       - "TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true"
       - "TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu"
     image: temporalio/auto-setup:1.28.1.0
