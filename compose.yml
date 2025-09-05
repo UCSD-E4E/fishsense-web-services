@@ -75,11 +75,11 @@ services:
       - TEMPORAL_AUTH_PROVIDER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-workflows/
       - TEMPORAL_AUTH_CALLBACK_URL=https://workflows.fishsense.e4e.ucsd.edu/auth/sso/callback
       - TEMPORAL_AUTH_SCOPES=openid,email,profile
-      - "TEMPORAL_TLS_CERT=/certs/client/fishsense-temporal-ui.pem"
-      - "TEMPORAL_TLS_KEY=/certs/client/fishsense-temporal-ui.key"
-      - "TEMPORAL_TLS_CA=/certs/ca/server-intermediate-ca.pem"
-      - "TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true"
-      - "TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu"
+      # - "TEMPORAL_TLS_CERT=/certs/client/fishsense-temporal-ui.pem"
+      # - "TEMPORAL_TLS_KEY=/certs/client/fishsense-temporal-ui.key"
+      # - "TEMPORAL_TLS_CA=/certs/ca/server-intermediate-ca.pem"
+      # - "TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true"
+      # - "TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu"
     networks:
       - caddy_proxy
       - default

@@ -1,13 +1,13 @@
-tls.intermediate:
-  - value:
-    internode:
-      server:
-        certFile: /certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
-        keyFile: /certs/internode/workflows.fishsense.e4e.ucsd.edu.key
-        requireClientAuth: true
-        clientCaFiles:
-          - /certs/ca/server-intermediate-ca.pem
-      client:
-        serverName: dnsSanInInternodeCertificate
-        rootCaFiles:
-          - /certs/ca/server-intermediate-ca.pem
+# tls.intermediate:
+#   - value:
+#     internode:
+#       server:
+#         certFile: /certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
+#         keyFile: /certs/internode/workflows.fishsense.e4e.ucsd.edu.key
+#         requireClientAuth: true
+#         clientCaFiles:
+#           - /certs/ca/server-intermediate-ca.pem
+#       client:
+#         serverName: dnsSanInInternodeCertificate
+#         rootCaFiles:
+#           - /certs/ca/server-intermediate-ca.pem
