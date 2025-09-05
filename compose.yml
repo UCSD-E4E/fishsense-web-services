@@ -53,7 +53,7 @@ services:
       - "TEMPORAL_CLI_TLS_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem"
       - "TEMPORAL_CLI_TLS_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key"
       - "TEMPORAL_CLI_TLS_ENABLE_HOST_VERIFICATION=true"
-      - "TEMPORAL_CLI_TLS_SERVER_NAME=internode.cluster-x.contoso.com"
+      - "TEMPORAL_CLI_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu""
       - "TEMPORAL_TLS_CA=/certs/ca/server-intermediate-ca.pem"
       - "TEMPORAL_TLS_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem"
       - "TEMPORAL_TLS_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key"
