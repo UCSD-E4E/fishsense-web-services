@@ -49,6 +49,11 @@ services:
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development-sql.yaml
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CLI_ADDRESS=temporal:7233
+      - "TEMPORAL_TLS_CA=/certs/ca/server-intermediate-ca.pem"
+      - "TEMPORAL_TLS_CERT=/certs/internode/temporal.pem"
+      - "TEMPORAL_TLS_KEY=/certs/internode/temporal.key"
+      - "TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true"
+      - "TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu"
     image: temporalio/auto-setup:1.28.1.0
     env_file:
       - .secrets/temporal_database_password.env
@@ -56,6 +61,7 @@ services:
       - 7233:7233
     volumes:
       - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
+      - ./temporal_volumes/certs:/certs:ro
     restart: on-failure:15
 
   temporal-ui:
@@ -69,11 +75,18 @@ services:
       - TEMPORAL_AUTH_PROVIDER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-workflows/
       - TEMPORAL_AUTH_CALLBACK_URL=https://workflows.fishsense.e4e.ucsd.edu/auth/sso/callback
       - TEMPORAL_AUTH_SCOPES=openid,email,profile
+      - "TEMPORAL_TLS_CERT=/certs/client/fishsense-temporal-ui.pem"
+      - "TEMPORAL_TLS_KEY=/certs/client/fishsense-temporal-ui.key"
+      - "TEMPORAL_TLS_CA=/certs/ca/server-intermediate-ca.pem"
+      - "TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true"
+      - "TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu"
     networks:
       - caddy_proxy
       - default
     env_file:
       - .secrets/temporal_ui.env
+    volumes:
+      - ./temporal_volumes/certs:/certs:ro
     image: temporalio/ui:2.39.0
     labels:
       caddy: workflows.fishsense.e4e.ucsd.edu
