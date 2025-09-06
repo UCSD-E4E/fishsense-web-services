@@ -68,6 +68,7 @@ services:
       - TEMPORAL_CLI_TLS_KEY=/certs/client/fishsense-temporal.key
       - TEMPORAL_CLI_TLS_ENABLE_HOST_VERIFICATION=true
       - TEMPORAL_CLI_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
+      - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
     image: temporalio/auto-setup:1.28.1.0
     env_file:
       - .secrets/temporal_database_password.env
