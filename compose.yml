@@ -47,7 +47,6 @@ services:
       - POSTGRES_SEEDS=postgres
       - SKIP_DB_CREATE=true
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/docker.yml
-      - SERVICES=frontend:matching:history:internal-frontend:worker
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/server-intermediate-ca.pem
       - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
