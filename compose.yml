@@ -37,7 +37,7 @@ services:
 
   temporal:
     container_name: fishsense-temporal
-    command: [ "temporal-server", "start", "--config", "/etc/temporal/config", "--env", "docker" ]
+    # command: [ "temporal-server", "start", "--config", "/etc/temporal/config", "--env", "docker" ]
     depends_on:
       - postgres
     environment:
@@ -82,7 +82,7 @@ services:
     volumes:
       - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
       - ./temporal_volumes/certs:/certs:ro
-      - ./temporal_volumes/temporal-server.yaml:/etc/temporal/config/config_template.yaml:ro
+      # - ./temporal_volumes/temporal-server.yaml:/etc/temporal/config/config_template.yaml:ro
     restart: on-failure:15
 
   temporal-ui:
