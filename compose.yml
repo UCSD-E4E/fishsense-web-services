@@ -53,7 +53,7 @@ services:
       - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
 
       - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
-      - TEMPORAL_TLS_SERVER_KEY=/certs/internode/workflows.fishsense.e43e.ucsd.edu.key
+      - TEMPORAL_TLS_SERVER_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
       - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
       - TEMPORAL_TLS_INTERNODE_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
 
