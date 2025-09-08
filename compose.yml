@@ -55,8 +55,8 @@ services:
       - TEMPORAL_TLS_INTERNODE_CA=/certs/ca/root-ca.pem
 
       # Define your intermediate CA for client authentication
-      - TEMPORAL_TLS_INTERNODE_CA_CERT=/certs/ca/root-ca.pem
-      - TEMPORAL_TLS_INTERNODE_CA=/certs/ca/root-ca.pem
+      - TEMPORAL_TLS_FRONTEND_CA_CERT=/certs/ca/server-intermediate-ca.pem
+      - TEMPORAL_TLS_FRONTEND_CA=/certs/ca/server-intermediate-ca.pem
 
       # Other variables remain similar, but ensure your certificate chain is correct
       - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
