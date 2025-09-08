@@ -50,33 +50,29 @@ services:
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CLI_ADDRESS=temporal:7236
 
-      - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/server-intermediate-ca.pem
-      - TEMPORAL_TLS_SERVER_CA=/certs/ca/server-intermediate-ca.pem
+      # Define your root CA certificate for internode communication
+      - TEMPORAL_TLS_INTERNODE_CA_CERT=/certs/ca/root-ca.pem
+      - TEMPORAL_TLS_INTERNODE_CA=/certs/ca/root-ca.pem
+
+      # Define your intermediate CA for client authentication
+      - TEMPORAL_TLS_FRONTEND_CA_CERT=/certs/ca/server-intermediate-ca.pem
+      - TEMPORAL_TLS_FRONTEND_CA=/certs/ca/server-intermediate-ca.pem
+
+      # Other variables remain similar, but ensure your certificate chain is correct
       - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       - TEMPORAL_TLS_SERVER_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
       - TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-      - TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true
       - TEMPORAL_TLS_INTERNODE_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
       - TEMPORAL_TLS_INTERNODE_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       - TEMPORAL_TLS_INTERNODE_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
-      - TEMPORAL_TLS_INTERNODE_DISABLE_HOST_VERIFICATION=false
-      - TEMPORAL_TLS_INTERNODE_CA_CERT=/certs/ca/server-intermediate-ca.pem
-      - TEMPORAL_TLS_INTERNODE_CA=/certs/ca/server-intermediate-ca.pem
+
       - TEMPORAL_TLS_FRONTEND_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
       - TEMPORAL_TLS_FRONTEND_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       - TEMPORAL_TLS_FRONTEND_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
-      - TEMPORAL_TLS_FRONTEND_CA_CERT=/certs/ca/server-intermediate-ca.pem
-      - TEMPORAL_TLS_FRONTEND_CA=/certs/ca/server-intermediate-ca.pem
-      - TEMPORAL_TLS_FRONTEND_DISABLE_HOST_VERIFICATION=false
-      - TEMPORAL_CLI_TLS_CA_CERT=/certs/ca/server-intermediate-ca.pem
-      - TEMPORAL_CLI_TLS_CA=/certs/ca/server-intermediate-ca.pem
-      - TEMPORAL_CLI_TLS_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
-      - TEMPORAL_CLI_TLS_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
-      - TEMPORAL_CLI_TLS_ENABLE_HOST_VERIFICATION=true
-      - TEMPORAL_CLI_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-      - TEMPORAL_TLS_CLIENT1_CA_CERT=/certs/ca/server-intermediate-ca.pem
-      - TEMPORAL_TLS_CLIENT2_CA_CERT=/certs/ca/server-intermediate-ca.pem
+
+      # Require client authentication on the frontend
       - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
+
     image: temporalio/auto-setup:1.28.1.0
     env_file:
       - .secrets/temporal_database_password.env
