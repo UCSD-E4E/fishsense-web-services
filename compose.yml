@@ -59,6 +59,7 @@ services:
       - TEMPORAL_TLS_INTERNODE_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       - TEMPORAL_TLS_INTERNODE_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
       - TEMPORAL_TLS_INTERNODE_DISABLE_HOST_VERIFICATION=false
+      - TEMPORAL_TLS_INTERNODE_CA_CERT=/certs/ca/server-intermediate-ca.pem
       - TEMPORAL_TLS_FRONTEND_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
       - TEMPORAL_TLS_FRONTEND_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       - TEMPORAL_TLS_FRONTEND_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
