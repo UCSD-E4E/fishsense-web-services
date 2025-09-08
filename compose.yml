@@ -60,16 +60,18 @@ services:
       # - TEMPORAL_TLS_FRONTEND_CA=/certs/ca/server-intermediate-ca.pem
 
       # # Other variables remain similar, but ensure your certificate chain is correct
-      # - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
-      # - TEMPORAL_TLS_SERVER_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
+      - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
+      - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
+      - TEMPORAL_TLS_SERVER_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
       # - TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-      # - TEMPORAL_TLS_INTERNODE_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
+      - TEMPORAL_TLS_INTERNODE_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
       # - TEMPORAL_TLS_INTERNODE_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       # - TEMPORAL_TLS_INTERNODE_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
 
-      # - TEMPORAL_TLS_FRONTEND_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-      # - TEMPORAL_TLS_FRONTEND_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
-      # - TEMPORAL_TLS_FRONTEND_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
+      - TEMPORAL_TLS_FRONTEND_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
+      - TEMPORAL_TLS_FRONTEND_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
+      - TEMPORAL_TLS_FRONTEND_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
+      - TEMPORAL_TLS_CLIENT1_CA_CERT=/certs/ca/root-ca.pem
 
       # # Require client authentication on the frontend
       # - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
@@ -82,7 +84,7 @@ services:
     volumes:
       - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
       - ./temporal_volumes/certs:/certs:ro
-      # - ./temporal_volumes/temporal-server.yaml:/etc/temporal/config/config_template.yaml:ro
+      # - ./temporal_volumes/config_template.yaml:/etc/temporal/config/config_template.yaml:ro
     restart: on-failure:15
 
   temporal-ui:
