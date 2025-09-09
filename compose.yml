@@ -49,7 +49,8 @@ services:
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/docker.yaml
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CLI_ADDRESS=temporal:7236
-      - BIND_ON_IP=127.0.0.1
+      - USE_INTERNAL_FRONTEND=1
+      - SERVICES=frontend:history:matching:worker:internal-frontend
 
       - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
 
