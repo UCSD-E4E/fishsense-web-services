@@ -64,6 +64,13 @@ services:
       - TEMPORAL_TLS_FRONTEND_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
       - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
 
+      - TEMPORAL_CLI_ADDRESS=localhost:7233
+      - TEMPORAL_CLI_TLS=true
+      - TEMPORAL_CLI_TLS_CA=/certs/ca/root-ca.pem
+      - TEMPORAL_CLI_TLS_CERT=/certs/client/fishsense-temporal.pem
+      - TEMPORAL_CLI_TLS_KEY=/certs/client/fishsense-temporal.key
+      - TEMPORAL_CLI_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
+
       # - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
       # - TEMPORAL_TLS_SERVER_CA=/certs/ca/root-ca.pem
       # - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
