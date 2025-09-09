@@ -55,9 +55,9 @@ services:
       - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
 
       # server certs (MUST be chain = leaf+intermediate, no root)
-      - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.chain.pem
+      - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       - TEMPORAL_TLS_SERVER_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
-      - TEMPORAL_TLS_FRONTEND_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.chain.pem
+      - TEMPORAL_TLS_FRONTEND_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       - TEMPORAL_TLS_FRONTEND_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
 
       # trust anchor (root) for verifying clients and servers
