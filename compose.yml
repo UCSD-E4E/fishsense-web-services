@@ -48,7 +48,7 @@ services:
       - SKIP_DB_CREATE=true
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/docker.yaml
       - TEMPORAL_ADDRESS=temporal:7233
-      - TEMPORAL_CLI_ADDRESS=temporal:7233
+      # - TEMPORAL_CLI_ADDRESS=temporal:7233
       - BIND_ON_IP=0.0.0.0
 
       - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
