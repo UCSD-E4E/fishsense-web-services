@@ -54,15 +54,15 @@ services:
 
       - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       - TEMPORAL_TLS_SERVER_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
-      # - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
+      - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
       - TEMPORAL_TLS_INTERNODE_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
 
       - TEMPORAL_TLS_FRONTEND_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
       - TEMPORAL_TLS_FRONTEND_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
-      # - TEMPORAL_TLS_CLIENT1_CA_CERT=/certs/ca/root-ca.pem
-      # - TEMPORAL_TLS_CLIENT2_CA_CERT=/certs/ca/root-ca.pem
+      - TEMPORAL_TLS_CLIENT1_CA_CERT=/certs/ca/root-ca.pem
+      - TEMPORAL_TLS_CLIENT2_CA_CERT=/certs/ca/root-ca.pem
       - TEMPORAL_TLS_FRONTEND_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-      # - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
+      - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
 
       # - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
       # - TEMPORAL_TLS_SERVER_CA=/certs/ca/root-ca.pem
@@ -92,12 +92,12 @@ services:
       # - TEMPORAL_TLS_CLIENT2_CA_CERT=/certs/ca/root-ca.pem
       # - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
 
-    build:
-      context: .
-      dockerfile: Dockerfile.temporal
-      args:
-        - BASEIMAGE=auto-setup:1.28.1.0
-    # image: temporalio/auto-setup:1.28.1.0
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.temporal
+    #   args:
+    #     - BASEIMAGE=auto-setup:1.28.1.0
+    image: temporalio/auto-setup:1.28.1.0
     env_file:
       - .secrets/temporal_database_password.env
     ports:
