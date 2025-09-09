@@ -49,7 +49,7 @@ services:
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/docker.yaml
       - TEMPORAL_ADDRESS=temporal:7233
       # - TEMPORAL_CLI_ADDRESS=temporal:7233
-      - BIND_ON_IP=0.0.0.0
+      # - BIND_ON_IP=0.0.0.0
 
       # require client certs everywhere
       - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
@@ -86,9 +86,6 @@ services:
       - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
       - ./temporal_volumes/config_template.yaml:/etc/temporal/config/config_template.yaml:ro
       - ./temporal_volumes/certs:/certs:ro
-    networks:
-      default:
-        ipv4_address: 172.26.0.100 # Assign a specific IP within the defined subnet
     restart: on-failure:15
 
   temporal-ui:
@@ -102,11 +99,11 @@ services:
       - TEMPORAL_AUTH_PROVIDER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-workflows/
       - TEMPORAL_AUTH_CALLBACK_URL=https://workflows.fishsense.e4e.ucsd.edu/auth/sso/callback
       - TEMPORAL_AUTH_SCOPES=openid,email,profile
-      - "TEMPORAL_TLS_CERT=/certs/client/fishsense-temporal-ui.pem"
-      - "TEMPORAL_TLS_KEY=/certs/client/fishsense-temporal-ui.key"
-      - "TEMPORAL_TLS_CA=/certs/ca/root-ca.pem"
-      - "TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true"
-      - "TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu"
+      - TEMPORAL_TLS_CERT=/certs/client/fishsense-temporal-ui.pem
+      - TEMPORAL_TLS_KEY=/certs/client/fishsense-temporal-ui.key
+      - TEMPORAL_TLS_CA=/certs/ca/root-ca.pem
+      - TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true
+      - TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
     networks:
       - caddy_proxy
       - default
@@ -266,8 +263,3 @@ volumes:
 networks:
   caddy_proxy:
     external: true
-  default:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.26.0.0/24 # Choose a subnet that doesn't conflict with existing networks
