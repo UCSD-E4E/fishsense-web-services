@@ -94,7 +94,7 @@ services:
 
     build:
       context: .
-      dockerfile: tls/Dockerfile.auto-setup-tls
+      dockerfile: Dockerfile.temporal
       args:
         - BASEIMAGE=auto-setup:1.28.1.0
     # image: temporalio/auto-setup:1.28.1.0
