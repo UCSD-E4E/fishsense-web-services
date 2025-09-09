@@ -208,6 +208,9 @@ global:
                 rootCaData:
                     - {{ default .Env.TEMPORAL_TLS_SERVER_CA_CERT_DATA "" }}
                 {{- end }}
+                
+                certFile: {{ default .Env.TEMPORAL_TLS_CLIENT_CERT "" }}
+                keyFile:  {{ default .Env.TEMPORAL_TLS_CLIENT_KEY  "" }}
         frontend:
             # This server section configures the TLS certificate that the Frontend
             # server presents to external clients.
@@ -242,6 +245,10 @@ global:
                 rootCaData:
                     - {{ default .Env.TEMPORAL_TLS_SERVER_CA_CERT_DATA "" }}
                 {{- end }}
+
+                certFile: {{ default .Env.TEMPORAL_TLS_CLIENT_CERT "" }}
+                keyFile:  {{ default .Env.TEMPORAL_TLS_CLIENT_KEY  "" }}
+                
     {{- if .Env.STATSD_ENDPOINT }}
     metrics:
         statsd:
