@@ -70,6 +70,10 @@ services:
       - TEMPORAL_CLI_TLS_CERT=/certs/client/fishsense-temporal.pem
       - TEMPORAL_CLI_TLS_KEY=/certs/client/fishsense-temporal.key
       - TEMPORAL_CLI_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
+      - TEMPORAL_CLI_TLS_CA_PATH=/certs/ca/root-ca.pem
+      - TEMPORAL_CLI_TLS_CERT_PATH=/certs/client/fishsense-temporal.pem   # chain! (leaf+intermediate)
+      - TEMPORAL_CLI_TLS_KEY_PATH=/certs/client/fishsense-temporal.key
+      - TEMPORAL_CLI_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
 
       - TEMPORAL_TLS_CLIENT_CERT=/certs/client/fishsense-temporal.pem
       - TEMPORAL_TLS_CLIENT_KEY=/certs/client/fishsense-temporal.key
