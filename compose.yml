@@ -48,7 +48,7 @@ services:
       - SKIP_DB_CREATE=true
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/docker.yaml
       - TEMPORAL_ADDRESS=temporal:7233
-      - TEMPORAL_CLI_ADDRESS=temporal:7233
+      # - TEMPORAL_CLI_ADDRESS=temporal:7233
       - BIND_ON_IP=0.0.0.0
 
       - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
@@ -64,7 +64,7 @@ services:
       - TEMPORAL_TLS_FRONTEND_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
       - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem
 
-      # - TEMPORAL_CLI_ADDRESS=localhost:7233
+      - TEMPORAL_CLI_ADDRESS=localhost:7233
       - TEMPORAL_CLI_TLS=true
       - TEMPORAL_CLI_TLS_CA=/certs/ca/root-ca.pem
       - TEMPORAL_CLI_TLS_CERT=/certs/client/fishsense-temporal.pem
