@@ -1,3 +1,6 @@
+[general]
+max_workers=8
+
 [temporal]
 host = "fishsense-temporal"
 port = "7233"
