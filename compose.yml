@@ -122,6 +122,8 @@ services:
   fishsense-api:
     container_name: fishsense-api
     image: ghcr.io/ucsd-e4e/fishsense-api:v1.0.1
+    volumes:
+      - ./fishsense_api_volumes/config:/e4efs/config:ro
     restart: on-failure:15
 
   # temporal-worker:
