@@ -32,7 +32,7 @@ services:
       - ./proxy_volumes/data:/data
     networks:
       - caddy_proxy
-      - default
+      - orchestrator
     restart: on-failure:15
 
   temporal:
@@ -124,6 +124,8 @@ services:
     image: ghcr.io/ucsd-e4e/fishsense-api:v1.0.1
     volumes:
       - ./fishsense_api_volumes/config:/e4efs/config:ro
+    networks:
+      - orchestrator
     restart: on-failure:15
 
   # temporal-worker:
@@ -271,5 +273,6 @@ volumes:
     external: true
 
 networks:
+  orchestrator:
   caddy_proxy:
     external: true
