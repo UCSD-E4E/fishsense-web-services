@@ -119,8 +119,8 @@ services:
       caddy.reverse_proxy: "{{upstreams 8080}}"
     restart: on-failure:15
 
-    fishsense_api:
-      container_name: fishsense_api
+    fishsense-api:
+      container_name: fishsense-api
       image: ghcr.io/ucsd-e4e/fishsense-api:v1.0.1
       restart: on-failure:15
 
