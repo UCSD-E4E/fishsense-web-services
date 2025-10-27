@@ -24,6 +24,8 @@ services:
   proxy:
     image: nginx:1.29.1-alpine
     container_name: fishsense_proxy
+    depends_on:
+      - fishsense-api
     labels:
       caddy: orchestrator.fishsense.e4e.ucsd.edu
       caddy.reverse_proxy: "{{upstreams 80}}"
@@ -121,7 +123,7 @@ services:
 
   fishsense-api:
     container_name: fishsense-api
-    image: ghcr.io/ucsd-e4e/fishsense-api:v1.0.1
+    image: ghcr.io/ucsd-e4e/fishsense-api:v1.0.2
     volumes:
       - ./fishsense_api_volumes/config:/e4efs/config:ro
     networks:
