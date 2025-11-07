@@ -5,21 +5,21 @@ x-superset-volumes:
   - ./superset_volumes/home:/app/superset_home
 
 services:
-  label_studio_reporter:
-    image: ghcr.io/ucsd-e4e/label-studio-slack-reporter:v1.0.9
-    container_name: label_studio_reporter
-    restart: always
-    command: --config /e4e/config/config.toml
-    ports:
-      - 9101:9100
-    networks:
-      - caddy_proxy
-      - default
-    volumes:
-      - ./label_studio_reporter/config:/e4e/config/:ro
-      - ./label_studio_reporter/cache:/e4e/cache/:rw
-      - ./label_studio_reporter/logs:/e4e/logs/:rw
-    user: "${USER_ID}:${GROUP_ID}"
+#  label_studio_reporter:
+#    image: ghcr.io/ucsd-e4e/label-studio-slack-reporter:v1.0.9
+#    container_name: label_studio_reporter
+#    restart: always
+#    command: --config /e4e/config/config.toml
+#    ports:
+#      - 9101:9100
+#    networks:
+#      - caddy_proxy
+#      - default
+#    volumes:
+#      - ./label_studio_reporter/config:/e4e/config/:ro
+#      - ./label_studio_reporter/cache:/e4e/cache/:rw
+#      - ./label_studio_reporter/logs:/e4e/logs/:rw
+#    user: "${USER_ID}:${GROUP_ID}"
 
   proxy:
     image: nginx:1.29.1-alpine
