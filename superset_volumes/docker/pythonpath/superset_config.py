@@ -107,7 +107,11 @@ class CeleryConfig:
 
 CELERY_CONFIG = CeleryConfig
 
-FEATURE_FLAGS = {"ALERT_REPORTS": True}
+SLACK_API_TOKEN = os.getenv("SLACK_API_TOKEN", "")
+FEATURE_FLAGS = {
+  "ALERT_REPORTS": True,
+  "ALERT_REPORT_SLACK_V2": True,  # use the v2 upload path
+}
 ALERT_REPORTS_NOTIFICATION_DRY_RUN = True
 WEBDRIVER_BASEURL = f"http://fishsense_superset:8088{os.environ.get('SUPERSET_APP_ROOT', '/')}/"  # When using docker compose baseurl should be http://superset_nginx{ENV{BASEPATH}}/  # noqa: E501
 # The base URL for the email report hyperlinks.
@@ -149,9 +153,6 @@ ALLOW_LOCAL_USER_LOGIN = True
 
 # The default user self registration role
 AUTH_USER_REGISTRATION_ROLE = "Public"
-
-SLACK_API_TOKEN = os.getenv("SLACK_API_TOKEN", "")
-ALERT_REPORT_SLACK_V2 = True
 
 WEBDRIVER_AUTH = {"username": os.getenv("WEBDRIVER_AUTH_USERNAME", ""), "password":  os.getenv("WEBDRIVER_AUTH_PASSWORD", "")}
 
