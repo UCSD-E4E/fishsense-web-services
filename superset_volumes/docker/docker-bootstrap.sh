@@ -63,13 +63,6 @@ case "${1}" in
   worker)
     echo "Starting Celery worker..."
 
-    # Install geckodriver
-    GECKODRIVER_VERSION=0.36.0
-    wget -q https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz && \
-      tar -x geckodriver -zf geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz -O > /usr/bin/geckodriver && \
-      chmod 755 /usr/bin/geckodriver && \
-      rm geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
-
     # setting up only 2 workers by default to contain memory usage in dev environments
     celery --app=superset.tasks.celery_app:app worker -O fair -l INFO --concurrency=${CELERYD_CONCURRENCY:-2}
     ;;
