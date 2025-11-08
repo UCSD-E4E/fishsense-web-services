@@ -28,9 +28,9 @@ services:
       - fishsense-api
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.label-studio.rule=Host(`orchestrator.fishsense.e4e.ucsd.edu`)"
-      - "traefik.http.routers.label-studio.entrypoints=websecure"
-      - "traefik.http.routers.label-studio.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.fishsense_proxy.rule=Host(`orchestrator.fishsense.e4e.ucsd.edu`)"
+      - "traefik.http.routers.fishsense_proxy.entrypoints=websecure"
+      - "traefik.http.routers.fishsense_proxy.tls.certresolver=letsencrypt"
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./proxy_volumes/data:/data
@@ -120,9 +120,9 @@ services:
     image: temporalio/ui:2.39.0
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.label-studio.rule=Host(`workflows.fishsense.e4e.ucsd.edu`)"
-      - "traefik.http.routers.label-studio.entrypoints=websecure"
-      - "traefik.http.routers.label-studio.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.temporal_ui.rule=Host(`workflows.fishsense.e4e.ucsd.edu`)"
+      - "traefik.http.routers.temporal_ui.entrypoints=websecure"
+      - "traefik.http.routers.temporal_ui.tls.certresolver=letsencrypt"
     restart: on-failure:15
 
   fishsense-api:
@@ -159,9 +159,9 @@ services:
     restart: on-failure:15
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.label-studio.rule=Host(`analytics.fishsense.e4e.ucsd.edu`)"
-      - "traefik.http.routers.label-studio.entrypoints=websecure"
-      - "traefik.http.routers.label-studio.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.superset.rule=Host(`analytics.fishsense.e4e.ucsd.edu`)"
+      - "traefik.http.routers.superset.entrypoints=websecure"
+      - "traefik.http.routers.superset.tls.certresolver=letsencrypt"
     networks:
       - traefik_proxy
       - default
@@ -242,9 +242,9 @@ services:
     restart: on-failure:15
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.label-studio.rule=Host(`fishsense.e4e.ucsd.edu`)"
-      - "traefik.http.routers.label-studio.entrypoints=websecure"
-      - "traefik.http.routers.label-studio.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.mafl.rule=Host(`fishsense.e4e.ucsd.edu`)"
+      - "traefik.http.routers.mafl.entrypoints=websecure"
+      - "traefik.http.routers.mafl.tls.certresolver=letsencrypt"
     networks:
       - traefik_proxy
       - default
