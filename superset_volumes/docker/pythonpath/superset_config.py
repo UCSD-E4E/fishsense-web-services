@@ -145,6 +145,7 @@ OAUTH_PROVIDERS = [
 
 # Will allow user self registration, allowing to create Flask users from Authorized User
 AUTH_USER_REGISTRATION = True
+ALLOW_LOCAL_USER_LOGIN = True 
 
 # The default user self registration role
 AUTH_USER_REGISTRATION_ROLE = "Public"
