@@ -153,6 +153,8 @@ AUTH_USER_REGISTRATION_ROLE = "Public"
 SLACK_API_TOKEN = os.getenv("SLACK_API_TOKEN", "")
 ALERT_REPORT_SLACK_V2 = True
 
+WEBDRIVER_AUTH = {"username": os.getenv("WEBDRIVER_AUTH_USERNAME", ""), "password":  os.getenv("WEBDRIVER_AUTH_PASSWORD", "")}
+
 if os.getenv("CYPRESS_CONFIG") == "true":
     # When running the service as a cypress backend, we need to import the config
     # located @ tests/integration_tests/superset_test_config.py
