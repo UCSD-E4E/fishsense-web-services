@@ -200,7 +200,7 @@ services:
     depends_on:
       superset-init:
         condition: service_completed_successfully
-    user: "${USER_ID}:${GROUP_ID}"
+    user: "root"
     volumes: *superset-volumes
     healthcheck:
       test:
