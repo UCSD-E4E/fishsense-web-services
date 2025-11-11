@@ -25,6 +25,7 @@ services:
       - "traefik.http.routers.fishsense_api_server.rule=Host(`orchestrator.fishsense.e4e.ucsd.edu`)"
       - "traefik.http.routers.fishsense_api_server.entrypoints=websecure"
       - "traefik.http.routers.fishsense_api_server.tls.certresolver=letsencrypt"
+      - "traefik.http.services.fishsense_api_server.loadbalancer.server.port=8000"
     networks:
       - traefik_proxy
     restart: on-failure:15
