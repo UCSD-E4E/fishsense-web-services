@@ -1,3 +1,7 @@
+include:
+  - compose.orchestrator.yml
+  - compose.temporal.yml
+
 x-superset-image: &superset-image apachesuperset.docker.scarf.sh/apache/superset:5.0.0
 x-superset-volumes:
   &superset-volumes # /app/pythonpath_docker will be appended to the PYTHONPATH in the final container
@@ -5,145 +9,11 @@ x-superset-volumes:
   - ./superset_volumes/home:/app/superset_home
 
 services:
-#  label_studio_reporter:
-#    image: ghcr.io/ucsd-e4e/label-studio-slack-reporter:v1.0.9
-#    container_name: label_studio_reporter
-#    restart: always
-#    command: --config /e4e/config/config.toml
-#    ports:
-#      - 9101:9100
-#    networks:
-#      - caddy_proxy
-#      - default
-#    volumes:
-#      - ./label_studio_reporter/config:/e4e/config/:ro
-#      - ./label_studio_reporter/cache:/e4e/cache/:rw
-#      - ./label_studio_reporter/logs:/e4e/logs/:rw
-#    user: "${USER_ID}:${GROUP_ID}"
+  
 
-  static_file_server:
-    image: nginx:1.29.1-alpine
-    depends_on:
-      - fishsense-api
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fishsense_static_file_server.rule=Host(`orchestrator.fishsense.e4e.ucsd.edu`) && PathPrefix(`/api/v1/data`) && Method(`GET`)"
-      - "traefik.http.routers.fishsense_static_file_server.entrypoints=websecure"
-      - "traefik.http.routers.fishsense_static_file_server.tls.certresolver=letsencrypt"
-    volumes:
-      - ./static_file_server/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./static_file_server_volumes/data:/data
-    networks:
-      - traefik_proxy
-      - orchestrator
-    restart: on-failure:15
 
-  temporal:
-    container_name: fishsense-temporal
-    depends_on:
-      - postgres
-    environment:
-      - DB=postgres12
-      - DB_PORT=5432
-      - DBNAME=temporal_db
-      - POSTGRES_USER=temporal
-      - POSTGRES_SEEDS=postgres
-      - SKIP_DB_CREATE=true
-      - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/docker.yaml
-      - TEMPORAL_ADDRESS=temporal:7233
-      # - TEMPORAL_CLI_ADDRESS=temporal:7233
-      - BIND_ON_IP=0.0.0.0
 
-      # require client certs everywhere
-      - TEMPORAL_TLS_REQUIRE_CLIENT_AUTH=true
 
-      # server certs (MUST be chain = leaf+intermediate, no root)
-      - TEMPORAL_TLS_SERVER_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
-      - TEMPORAL_TLS_SERVER_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
-      - TEMPORAL_TLS_FRONTEND_CERT=/certs/internode/workflows.fishsense.e4e.ucsd.edu.pem
-      - TEMPORAL_TLS_FRONTEND_KEY=/certs/internode/workflows.fishsense.e4e.ucsd.edu.key
-
-      # trust anchor (root) for verifying clients and servers
-      - TEMPORAL_TLS_SERVER_CA_CERT=/certs/ca/root-ca.pem         # used by frontend.client + internode.client + server.clientAuth
-      - TEMPORAL_TLS_CLIENT1_CA_CERT=/certs/ca/root-ca.pem        # used by frontend.server.clientCaFiles
-
-      # SNI values (must be in server cert SANs)
-      - TEMPORAL_TLS_INTERNODE_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-      - TEMPORAL_TLS_FRONTEND_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-
-      # internal SDK (server-as-client) mTLS credentials (CLIENT CERT **chain** is OK too; leaf-only works if server has the intermediate)
-      - TEMPORAL_TLS_CLIENT_CERT=/certs/client/fishsense-temporal.pem
-      - TEMPORAL_TLS_CLIENT_KEY=/certs/client/fishsense-temporal.key
-
-      - TEMPORAL_ADDRESS=localhost:7233
-      - TEMPORAL_TLS_CA=/certs/ca/root-ca.pem
-      - TEMPORAL_TLS_CERT=/certs/client/fishsense-temporal.pem
-      - TEMPORAL_TLS_KEY=/certs/client/fishsense-temporal.key
-      - TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-    image: temporalio/auto-setup:1.28.1.0
-    env_file:
-      - .secrets/temporal_database_password.env
-    ports:
-      - 7233:7233
-    volumes:
-      - ./temporal_volumes/dynamicconfig:/etc/temporal/config/dynamicconfig
-      - ./temporal_volumes/config_template.yaml:/etc/temporal/config/config_template.yaml:ro
-      - ./temporal_volumes/certs:/certs:ro
-    restart: on-failure:15
-
-  temporal-ui:
-    container_name: fishsense_temporal-ui
-    depends_on:
-      - temporal
-    environment:
-      - TEMPORAL_ADDRESS=fishsense-temporal:7233
-      - TEMPORAL_CORS_ORIGINS=http://localhost:3000
-
-      - TEMPORAL_AUTH_ENABLED=true
-      - TEMPORAL_AUTH_PROVIDER_URL=https://auth.fabricant.ucsd.edu/application/o/fishsense-workflows/
-      - TEMPORAL_AUTH_CALLBACK_URL=https://workflows.fishsense.e4e.ucsd.edu/auth/sso/callback
-      - TEMPORAL_AUTH_SCOPES=openid,email,profile
-
-      - TEMPORAL_TLS_CERT=/certs/client/fishsense-temporal-ui.pem
-      - TEMPORAL_TLS_KEY=/certs/client/fishsense-temporal-ui.key
-      - TEMPORAL_TLS_CA=/certs/ca/root-ca.pem
-      - TEMPORAL_TLS_ENABLE_HOST_VERIFICATION=true
-      - TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-    networks:
-      - traefik_proxy
-      - default
-    env_file:
-      - .secrets/temporal_ui.env
-    volumes:
-      - ./temporal_volumes/certs:/certs:ro
-    image: temporalio/ui:2.39.0
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.temporal_ui.rule=Host(`workflows.fishsense.e4e.ucsd.edu`)"
-      - "traefik.http.routers.temporal_ui.entrypoints=websecure"
-      - "traefik.http.routers.temporal_ui.tls.certresolver=letsencrypt"
-    restart: on-failure:15
-
-  fishsense-api:
-    container_name: fishsense-api
-    image: ghcr.io/ucsd-e4e/fishsense-api:v1.0.2
-    volumes:
-      - ./fishsense_api_volumes/config:/e4efs/config:ro
-    networks:
-      - orchestrator
-    restart: on-failure:15
-
-  # temporal-worker:
-  #   depends_on:
-  #     - temporal
-  #   volumes:
-  #     - ./temporal_volumes/certs:/certs:ro
-  #     - ./worker_volumes/config:/e4efs/config:ro
-  #     - ./worker_volumes/logs:/e4efs/logs:rw
-  #   image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.13.0
-  #   restart: on-failure:15
-  #   deploy:
-  #     replicas: 2
 
   superset:
     container_name: fishsense_superset
@@ -272,14 +142,6 @@ services:
 secrets:
   postgres_admin_password: 
     file: .secrets/postgres_admin_password.txt
-
-volumes:
-  fishsense_data_reef:
-    external: true
-  fishsense_lens_cal:
-    external: true
-  fishsense_process_work:
-    external: true
 
 networks:
   orchestrator:
