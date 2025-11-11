@@ -13,7 +13,6 @@ services:
       - ./static_file_server_volumes/data:/data
     networks:
       - traefik_proxy
-      - orchestrator
     restart: on-failure:15
 
   fishsense-api:
@@ -21,6 +20,11 @@ services:
     image: ghcr.io/ucsd-e4e/fishsense-api:v1.0.2
     volumes:
       - ./fishsense_api_volumes/config:/e4efs/config:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fishsense_api_server.rule=Host(`orchestrator.fishsense.e4e.ucsd.edu`)"
+      - "traefik.http.routers.fishsense_api_server.entrypoints=websecure"
+      - "traefik.http.routers.fishsense_api_server.tls.certresolver=letsencrypt"
     networks:
-      - orchestrator
+      - traefik_proxy
     restart: on-failure:15
