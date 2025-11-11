@@ -21,16 +21,15 @@ services:
 #      - ./label_studio_reporter/logs:/e4e/logs/:rw
 #    user: "${USER_ID}:${GROUP_ID}"
 
-  proxy:
+  static_file_server:
     image: nginx:1.29.1-alpine
-    container_name: fishsense_proxy
     depends_on:
       - fishsense-api
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.fishsense_proxy.rule=Host(`orchestrator.fishsense.e4e.ucsd.edu`)"
-      - "traefik.http.routers.fishsense_proxy.entrypoints=websecure"
-      - "traefik.http.routers.fishsense_proxy.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.fishsense_static_file_server.rule=Host(`orchestrator.fishsense.e4e.ucsd.edu`) && PathPrefix(`/api/v1/data`) && Method(`GET`)"
+      - "traefik.http.routers.fishsense_static_file_server.entrypoints=websecure"
+      - "traefik.http.routers.fishsense_static_file_server.tls.certresolver=letsencrypt"
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./proxy_volumes/data:/data
