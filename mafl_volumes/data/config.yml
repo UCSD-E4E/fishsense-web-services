@@ -26,9 +26,15 @@ services:
         name: streamline-sharp:label-folder-tag-remix
         wrap: true
   Results:
-    - title: Analytics
-      description: Results dashboard from Apache Superset
-      link: https://analytics.fishsense.e4e.ucsd.edu/superset/dashboard/reef-smile-project
+    - title: Lengths
+      description: Lengths dashboard from Apache Superset
+      link: https://analytics.fishsense.e4e.ucsd.edu/superset/dashboard/reef-smile-lengths
+      icon:
+        name: simple-icons:apachesuperset
+        wrap: true
+    - title: Metrics
+      description: Metrics dashboard from Apache Superset
+      link: https://analytics.fishsense.e4e.ucsd.edu/superset/dashboard/reef-smile-metrics
       icon:
         name: simple-icons:apachesuperset
         wrap: true
