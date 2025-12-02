@@ -17,7 +17,7 @@ services:
 
   fishsense-api:
     container_name: fishsense-api
-    image: ghcr.io/ucsd-e4e/fishsense-api:v1.11.0
+    image: ghcr.io/ucsd-e4e/fishsense-api:v1.12.0
     volumes:
       - ./fishsense_api_volumes/config:/e4efs/config:ro
     labels:
