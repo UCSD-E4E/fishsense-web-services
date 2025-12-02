@@ -85,14 +85,14 @@ services:
       - "traefik.http.routers.temporal_ui.tls.certresolver=letsencrypt"
     restart: on-failure:15
 
-  # temporal-worker:
-  #   depends_on:
-  #     - temporal
-  #   volumes:
-  #     - ./temporal_volumes/certs:/certs:ro
-  #     - ./worker_volumes/config:/e4efs/config:ro
-  #     - ./worker_volumes/logs:/e4efs/logs:rw
-  #   image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.13.0
-  #   restart: on-failure:15
-  #   deploy:
-  #     replicas: 2
+  fishsense-api-workflow-worker:
+    depends_on:
+      - temporal
+    volumes:
+      - ./temporal_volumes/certs:/certs:ro
+      - ./worker_volumes/config:/e4efs/config:ro
+      - ./worker_volumes/logs:/e4efs/logs:rw
+    image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.14.0
+    restart: on-failure:15
+    deploy:
+      replicas: 2
