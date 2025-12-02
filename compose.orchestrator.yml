@@ -17,7 +17,7 @@ services:
 
   fishsense-api:
     container_name: fishsense-api
-    image: ghcr.io/ucsd-e4e/fishsense-api:v1.12.0
+    image: ghcr.io/ucsd-e4e/fishsense-api:v1.12.1
     volumes:
       - ./fishsense_api_volumes/config:/e4efs/config:ro
     labels:
@@ -29,4 +29,6 @@ services:
       - "traefik.http.services.fishsense_api_server.loadbalancer.server.port=8000"
     networks:
       - traefik_proxy
+    deploy:
+      replicas: 2
     restart: on-failure:15
