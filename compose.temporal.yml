@@ -92,7 +92,8 @@ services:
       - ./temporal_volumes/certs:/certs:ro
       - ./worker_volumes/config:/e4efs/config:ro
       - ./worker_volumes/logs:/e4efs/logs:rw
-    image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.14.0
+      - ./mafl_volumes/data/config.yml:/config/dashboard_config.yaml:rw
+    image: ghcr.io/ucsd-e4e/fishsense-api-workflow-worker:v1.15.0
     restart: on-failure:15
     deploy:
       replicas: 2
