@@ -21,7 +21,7 @@ services:
       - "traefik.http.routers.superset.rule=Host(`analytics.fishsense.e4e.ucsd.edu`)"
       - "traefik.http.routers.superset.entrypoints=websecure"
       - "traefik.http.routers.superset.tls.certresolver=letsencrypt"
-      - "traefik.http.services.fishsense_superset.loadbalancer.server.port=8088"
+      - "traefik.http.services.superset.loadbalancer.server.port=8088"
     networks:
       - traefik_proxy
       - default
