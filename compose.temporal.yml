@@ -41,7 +41,7 @@ services:
       - TEMPORAL_TLS_CERT=/certs/client/fishsense-temporal.pem
       - TEMPORAL_TLS_KEY=/certs/client/fishsense-temporal.key
       - TEMPORAL_TLS_SERVER_NAME=workflows.fishsense.e4e.ucsd.edu
-    image: temporalio/auto-setup:1.28.1.0
+    image: temporalio/auto-setup:1.29
     env_file:
       - .secrets/temporal_database_password.env
     ports:
@@ -77,7 +77,7 @@ services:
       - .secrets/temporal_ui.env
     volumes:
       - ./temporal_volumes/certs:/certs:ro
-    image: temporalio/ui:2.39.0
+    image: temporalio/ui:2.44.0
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.temporal_ui.rule=Host(`workflows.fishsense.e4e.ucsd.edu`)"

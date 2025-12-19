@@ -7,7 +7,7 @@ include:
 
 services:
   qcomm-static-file-server:
-    image: nginx:1.29.1-alpine
+    image: nginx:1.29-alpine
     depends_on:
       - fishsense-api
     labels:
@@ -39,7 +39,7 @@ services:
       - ./mafl_volumes/data:/app/data
 
   postgres:
-    image: postgres:16.4
+    image: postgres:16.11
     restart: on-failure:15
     shm_size: 128 mb
     environment:

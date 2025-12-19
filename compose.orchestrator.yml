@@ -1,6 +1,6 @@
 services:
   static_file_server:
-    image: nginx:1.29.1-alpine
+    image: nginx:1.29-alpine
     depends_on:
       - fishsense-api
     labels:
