@@ -115,6 +115,8 @@ SMTP_STARTTLS = False
 SMTP_SSL_SERVER_AUTH = False # If you're using an SMTP server with a valid certificate
 SMTP_SSL = False
 SMTP_MAIL_FROM = os.getenv("SMTP_MAIL_FROM", "")
+SMTP_USER = None
+SMTP_PASSWORD = None
 EMAIL_NOTIFICATIONS = True
 EMAIL_REPORTS_SUBJECT_PREFIX = "[Superset] "
 
