@@ -18,9 +18,9 @@ services:
     restart: on-failure:15
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.superset.rule=Host(`analytics.fishsense.e4e.ucsd.edu`)"
-      - "traefik.http.routers.superset.entrypoints=websecure"
-      - "traefik.http.routers.superset.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.fishsense_superset.rule=Host(`analytics.fishsense.e4e.ucsd.edu`)"
+      - "traefik.http.routers.fishsense_superset.entrypoints=websecure"
+      - "traefik.http.routers.fishsense_superset.tls.certresolver=letsencrypt"
     networks:
       - traefik_proxy
       - default
