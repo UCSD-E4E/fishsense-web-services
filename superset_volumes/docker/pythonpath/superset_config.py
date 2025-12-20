@@ -125,11 +125,20 @@ FEATURE_FLAGS = {
   "ALERT_REPORT_SLACK_V2": True,  # use the v2 upload path
 }
 ALERT_REPORTS_NOTIFICATION_DRY_RUN = False
+
 WEBDRIVER_BASEURL = f"http://fishsense_superset:8088{os.environ.get('SUPERSET_APP_ROOT', '/')}/"  # When using docker compose baseurl should be http://superset_nginx{ENV{BASEPATH}}/  # noqa: E501
 # The base URL for the email report hyperlinks.
 WEBDRIVER_BASEURL_USER_FRIENDLY = (
     f"http://fishsense_superset:8088{os.environ.get('SUPERSET_APP_ROOT', '/')}/"
 )
+WEBDRIVER_TYPE = "chrome"
+WEBDRIVER_OPTION_ARGS = [
+    "--headless=new",
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    "--disable-gpu",
+    "--window-size=1920,1080",
+]
 SQLLAB_CTAS_NO_LIMIT = True
 ENABLE_PROXY_FIX = True
 
