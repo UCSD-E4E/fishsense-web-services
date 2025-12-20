@@ -108,6 +108,15 @@ class CeleryConfig:
 CELERY_CONFIG = CeleryConfig
 
 SLACK_API_TOKEN = os.getenv("SLACK_API_TOKEN", "")
+
+SMTP_HOST = "smtp.ucsd.edu" # change to your host
+SMTP_PORT = 25 # your port, e.g. 587
+SMTP_STARTTLS = False
+SMTP_SSL_SERVER_AUTH = False # If you're using an SMTP server with a valid certificate
+SMTP_SSL = False
+SMTP_MAIL_FROM = os.getenv("SMTP_MAIL_FROM", "")
+EMAIL_REPORTS_SUBJECT_PREFIX = "[Superset] "
+
 FEATURE_FLAGS = {
   "ALERT_REPORTS": True,
   "ALERT_REPORT_SLACK_V2": True,  # use the v2 upload path
