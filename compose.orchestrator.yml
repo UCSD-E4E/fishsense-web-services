@@ -26,6 +26,12 @@ services:
       - "traefik.http.routers.fishsense_api_server.tls.certresolver=letsencrypt"
       - "traefik.http.routers.fishsense_api_server.middlewares=authentik@docker"
       - "traefik.http.services.fishsense_api_server.loadbalancer.server.port=8000"
+
+      # Ping endpoint for health checks
+      - "traefik.http.routers.fishsense_api_server_ping.rule=Host(`orchestrator.fishsense.e4e.ucsd.edu`) && Path(`/`)"
+      - "traefik.http.routers.fishsense_api_server_ping.entrypoints=websecure"
+      - "traefik.http.routers.fishsense_api_server_ping.tls.certresolver=letsencrypt"
+      - "traefik.http.services.fishsense_api_server_ping.loadbalancer.server.port=8000"
     networks:
       - traefik_proxy
     deploy:
