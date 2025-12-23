@@ -63,5 +63,7 @@ secrets:
 
 networks:
   orchestrator:
+  prometheus_network:
+    external: true
   traefik_proxy:
     external: true

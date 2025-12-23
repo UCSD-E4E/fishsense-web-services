@@ -53,6 +53,9 @@ services:
       - ./temporal_volumes/config_template.yaml:/etc/temporal/config/config_template.yaml:ro
       - ./temporal_volumes/certs:/certs:ro
     restart: on-failure:15
+    networks:
+      - default
+      - prometheus_network
 
   temporal-ui:
     container_name: fishsense_temporal-ui
