@@ -16,6 +16,8 @@ services:
       - "traefik.http.routers.fishsense_qualcomm_static_file_server.entrypoints=websecure"
       - "traefik.http.routers.fishsense_qualcomm_static_file_server.tls.certresolver=letsencrypt"
       - "traefik.http.routers.fishsense_qualcomm_static_file_server.middlewares=authentik@docker"
+      - "traefik.http.routers.fishsense_qualcomm_static_file_server.middlewares=forcehttps,authentik@docker"
+      - "traefik.http.middlewares.forcehttps.headers.customRequestHeaders.X-Forwarded-Proto=https"
     volumes:
       - ./qcomm_static_file_server/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./qcomm_static_file_server_volumes/www_root:/www_root:ro
