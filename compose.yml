@@ -12,7 +12,7 @@ services:
       - fishsense-api
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.fishsense_qualcomm_static_file_server.rule=Host(`qcomm.docs.fabricant.ucsd.edu`)"
+      - "traefik.http.routers.fishsense_qualcomm_static_file_server.rule=Host(`qcomm.docs.fabricant.ucsd.edu`) && !PathPrefix(`/outpost.goauthentik.io/`)"
       - "traefik.http.routers.fishsense_qualcomm_static_file_server.entrypoints=websecure"
       - "traefik.http.routers.fishsense_qualcomm_static_file_server.tls.certresolver=letsencrypt"
       - "traefik.http.routers.fishsense_qualcomm_static_file_server.middlewares=authentik@docker"
