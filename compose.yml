@@ -62,6 +62,11 @@ secrets:
     file: .secrets/postgres_admin_password.txt
 
 networks:
+  default:  
+    ipam:  
+      driver: default  
+      config:  
+        - subnet: "172.20.0.0/16"
   orchestrator:
   prometheus_network:
     external: true
